@@ -7,12 +7,12 @@ class Graph():
 
     def __init__(self):
 
-
+        """
         # Verificando se o grafo existe, se sim carregue ele.
         if os.path.exists('grafos/grafo.gml'):
             self.graph = igraph.load('grafos/grafo.gml')
             return
-        
+        """ 
         vertexes = []
         edges = []
         graph_file = 'grafos/grafo.txt'
@@ -40,7 +40,7 @@ class Graph():
 
         #layout = self.graph.layout_kamada_kawai()
         #layout = self.graph.layout_grid()
-        layout = self.graph.layout_davidson_harel(maxiter=1000)
+        layout = self.graph.layout_davidson_harel(maxiter=1000, weight_border=100)
         igraph.plot(self.graph,"grafos/grafo.pdf", layout=layout, bbox = (1100, 1000))
         self.graph.save("grafos/grafo.gml", format="gml")
 
