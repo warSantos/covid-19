@@ -28,7 +28,12 @@ class Graph():
 
         # Criando um grafo direcionado.
         self.graph = igraph.Graph(directed=True)
+        
         df = pd.read_csv('grafos/cidades.txt')
+        coords = []
+        # Resgatando informações de latitude e longitude.
+        for row in df.itertuples():
+            coords.append([row.lati, row.long])
         
         nomes = list(set(df['nome']))
         nomes.sort()
@@ -40,7 +45,7 @@ class Graph():
 
         #layout = self.graph.layout_kamada_kawai()
         #layout = self.graph.layout_grid()
-        layout = self.graph.layout_davidson_harel(maxiter=1000, weight_border=100)
+        layout = self.graph.layout_davidson_harel(seed=coords, maxiter=10000, weight_border=100)
         igraph.plot(self.graph,"grafos/grafo.pdf", layout=layout, bbox = (1100, 1000))
         self.graph.save("grafos/grafo.gml", format="gml")
 
