@@ -28,7 +28,7 @@ class Dataset():
 
     def distrib_regs(self, att, alvo, x_label, y_label, dst, figsize=None, pos=1):
 
-        ## Distribuição de registros pelas cidades.
+        ## Distribuição de registros.
         cids = []
         for valor in sorted(set(self.df_micro[att])):
             temp = self.df_micro.query(att+" == '%s'" % valor)
@@ -49,12 +49,33 @@ class Dataset():
         plt.tight_layout()
         plt.plot()
         plt.savefig(dst)
+    
+    def distrib_casos(self, att='ibgeID'):
+
+        ## Distribuição de casos.
+        cids = {}
+        for cid in sorted(set(self.df_micro[att])):
+            temp = self.df_micro.query(att+" == '%s'" % cid)
+            cids[cid] = {}
+            # Verificando quantos casos a cidade tem por mês.
+            for row in temp.itertuples():
+                tks = row.date.split('-')
+                tks.pop()
+                mes = '-'.join(tks)
+                # Se este mês não estiver contabilidade no cidade.
+                if mes not in cids[cid]:
+                    cids[cid][mes] = 0
+                cids[cid][mes] += row.newCases
+        
+        pprint(cids)
 
 if __name__=='__main__':
 
     caminho_dataset = 'dados/cases-brazil-cities-time.csv'
     df = Dataset(caminho_dataset)
     # Dist. de registros por cidade.
-    df.distrib_regs('ibgeID','city', 'Qtde. Registros', 'Cidades', 'plots/dist_registros_cids.pdf')
+    #df.distrib_regs('ibgeID','city', 'Qtde. Registros', 'Cidades', 'plots/dist_registros_cids.pdf')
     # Dist. de registros por data.
-    df.distrib_regs('date','date', 'Qtde. Registros', 'Datas', 'plots/dist_registros_datas.pdf', figsize=(26, 5), pos=0)
+    #df.distrib_regs('date','date', 'Qtde. Registros', 'Datas', 'plots/dist_registros_datas.pdf', figsize=(26, 5), pos=0)
+    # Dist. de casos por cidade.
+    df.distrib_casos('city')
