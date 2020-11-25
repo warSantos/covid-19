@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Tue Nov 24 11:39:16 2020"
+Creator "igraph version 0.8.3 Wed Nov 25 08:54:46 2020"
 Version 1
 graph
 [
@@ -6,91 +6,91 @@ graph
   node
   [
     id 0
-    name "0"
+    name 3115201
     label "Conceição da Barra de Minas"
   ]
   node
   [
     id 1
-    name "1"
+    name 3119708
     label "Coronel Xavier Chaves"
   ]
   node
   [
     id 2
-    name "2"
+    name 3123007
     label "Dores de Campos"
   ]
   node
   [
     id 3
-    name "3"
+    name 3137403
     label "Lagoa Dourada"
   ]
   node
   [
     id 4
-    name "4"
+    name 2919926
     label "Madre de Deus de Minas"
   ]
   node
   [
     id 5
-    name "5"
+    name 3144508
     label "Nazareno"
   ]
   node
   [
     id 6
-    name "6"
+    name 3150307
     label "Piedade do Rio Grande"
   ]
   node
   [
     id 7
-    name "7"
+    name 3152709
     label "Prados"
   ]
   node
   [
     id 8
-    name "8"
+    name 3154200
     label "Resende Costa"
   ]
   node
   [
     id 9
-    name "9"
+    name 3156106
     label "Ritápolis"
   ]
   node
   [
     id 10
-    name "10"
+    name 3157336
     label "Santa Cruz de Minas"
   ]
   node
   [
     id 11
-    name "11"
+    name 3158706
     label "Santana do Garambéu"
   ]
   node
   [
     id 12
-    name "12"
+    name 3162500
     label "São João del-Rei"
   ]
   node
   [
     id 13
-    name "13"
+    name 3165008
     label "São Tiago"
   ]
   node
   [
     id 14
-    name "14"
+    name 3168804
     label "Tiradentes"
   ]
   edge

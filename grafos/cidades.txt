@@ -1,16 +1,16 @@
-id,nome,habitantes,lati,long
-0,Conceição da Barra de Minas,3.954,-21.1316,-44.4729
-1,Coronel Xavier Chaves,3.301,-21.0277,-44.2206
-2,Dores de Campos,9.299,-21.1139,-44.0207
-3,Lagoa Dourada,12.256,-20.9139,-44.0797
-4,Madre de Deus de Minas,4.904,-12.7446,-38.6153
-5,Nazareno,7.954,-21.2168,-44.6138
-6,Piedade do Rio Grande,4.709,-21.469,-44.1938
-7,Prados,8.391,-21.0597,-44.0778
-8,Resende Costa,10.913,-20.9171,-44.2407
-9,Ritápolis,4.925,-21.0276,-44.3204
-10,Santa Cruz de Minas,7.856,-21.1241,-44.2202
-11,Santana do Garambéu,2.234,-21.5983,-44.105
-12,São João del-Rei,84.469,-21.1311,-44.2526
-13,São Tiago,10.561,-20.9075,-44.5098
-14,Tiradentes,6.961,-21.1102,-44.1744
+id,nome,habitantes,lati,long,cod_ibge
+0,Conceição da Barra de Minas,3.954,-21.1316,-44.4729,3115201
+1,Coronel Xavier Chaves,3.301,-21.0277,-44.2206,3119708
+2,Dores de Campos,9.299,-21.1139,-44.0207,3123007
+3,Lagoa Dourada,12.256,-20.9139,-44.0797,3137403
+4,Madre de Deus de Minas,4.904,-12.7446,-38.6153,2919926
+5,Nazareno,7.954,-21.2168,-44.6138,3144508
+6,Piedade do Rio Grande,4.709,-21.469,-44.1938,3150307
+7,Prados,8.391,-21.0597,-44.0778,3152709
+8,Resende Costa,10.913,-20.9171,-44.2407,3154200
+9,Ritápolis,4.925,-21.0276,-44.3204,3156106
+10,Santa Cruz de Minas,7.856,-21.1241,-44.2202,3157336
+11,Santana do Garambéu,2.234,-21.5983,-44.105,3158706
+12,São João del-Rei,84.469,-21.1311,-44.2526,3162500
+13,São Tiago,10.561,-20.9075,-44.5098,3165008
+14,Tiradentes,6.961,-21.1102,-44.1744,3168804

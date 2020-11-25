@@ -35,18 +35,16 @@ class Graph():
         for row in df.itertuples():
             coords.append([row.lati, row.long])
         
-        nomes = list(set(df['nome']))
-        nomes.sort()
-
         self.graph.add_vertices(vertexes)
         self.graph.add_edges(edges)
         for i in range(0, len(vertexes)):
-            self.graph.vs[i]["label"] = nomes[i]
+            self.graph.vs[i]["label"] = df.iloc[i]['nome']
+            self.graph.vs[i]["name"] = df.iloc[i]['cod_ibge']
 
         #layout = self.graph.layout_kamada_kawai()
         #layout = self.graph.layout_grid()
-        layout = self.graph.layout_davidson_harel(seed=coords, maxiter=10000, weight_border=100)
-        igraph.plot(self.graph,"grafos/grafo.pdf", layout=layout, bbox = (1100, 1000))
+        #layout = self.graph.layout_davidson_harel(seed=coords, maxiter=10000, weight_border=100)
+        #igraph.plot(self.graph,"grafos/grafo.pdf", layout=layout, bbox = (1100, 1000))
         self.graph.save("grafos/grafo.gml", format="gml")
 
 
