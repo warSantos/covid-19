@@ -96,15 +96,17 @@ if __name__=='__main__':
 
     graph.setWeights(weights)
 
+    prediction_time = 10
 
-    x = range(10)
+    x = range(prediction_time)
     y = []
-    for i in range(10):
-        
-        y.append(graph.getTotalCases())
+    sum = 0
+
+    for i in range(prediction_time):
+        sum += graph.getTotalCases()
+        y.append(sum)
         print(y[i])
         
-        #print(graph.getTotalCases())
         graph.autoUpdateCases()
     
     plt.plot(x, y)
