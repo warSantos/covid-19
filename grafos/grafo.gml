@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Wed Nov 25 08:54:46 2020"
+Creator "igraph version 0.8.3 Wed Nov 25 11:37:16 2020"
 Version 1
 graph
 [
@@ -30,7 +30,7 @@ graph
   node
   [
     id 4
-    name 2919926
+    name 3139102
     label "Madre de Deus de Minas"
   ]
   node

@@ -3,7 +3,7 @@ id,nome,habitantes,lati,long,cod_ibge
 1,Coronel Xavier Chaves,3.301,-21.0277,-44.2206,3119708
 2,Dores de Campos,9.299,-21.1139,-44.0207,3123007
 3,Lagoa Dourada,12.256,-20.9139,-44.0797,3137403
-4,Madre de Deus de Minas,4.904,-12.7446,-38.6153,2919926
+4,Madre de Deus de Minas,4.904,-12.7446,-38.6153,3139102
 5,Nazareno,7.954,-21.2168,-44.6138,3144508
 6,Piedade do Rio Grande,4.709,-21.469,-44.1938,3150307
 7,Prados,8.391,-21.0597,-44.0778,3152709
