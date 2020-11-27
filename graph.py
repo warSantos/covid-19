@@ -4,26 +4,6 @@ import igraph
 import pandas as pd
 import numpy as np
 import random
-from matplotlib import pyplot as plt
-
-
-def readFiles():
-    vertexes = []
-    edges = []
-    graph_file = 'grafos/grafo.txt'
-    with open(graph_file, 'r') as fd:
-        # Para cada lista de edges de cada vértice.
-        for l in fd:
-            tokens = l.replace('\n','').split(',')
-            vertex = tokens.pop(0)
-            vertexes.append(vertex)
-            # Criando lista de arestas para cada vértice.
-            for v in tokens:
-                edges.append([vertex, v])
-
-    cities_df = pd.read_csv('grafos/cidades.txt')
-    
-    return vertexes, edges, cities_df
 
 class Graph():
 
@@ -31,13 +11,13 @@ class Graph():
 
         # Criando um grafo direcionado.
         self.graph = igraph.Graph(directed=True)
+        self.initial_values = initial_values
 
         self.m = len(edges)
         self.n = len(vertexes)
 
         # taxa de recuperação diária do coronavírus
         self.c = random.random()
-        print('c:', self.c)
        
         self.graph.add_vertices(vertexes)
         self.graph.add_edges(edges)
@@ -54,7 +34,9 @@ class Graph():
 
         self.graph.save("grafos/grafo.gml", format="gml")
 
-    def setWeights(self, weights):
+    def setWeights(self, c, weights):
+        self.c = c
+
         i = 0
         for edge in self.graph.get_edgelist():
 
@@ -68,8 +50,11 @@ class Graph():
 
         return sum
 
-    def autoUpdateCases(self):
+    def resetVertexValues(self):
+        for i in range(self.n):
+            self.graph.vs[i]["value"] = self.initial_values[i]
 
+    def autoUpdateCases(self):
         newVertexesValue = np.zeros(shape=self.n)
 
         for i in range(self.n):
@@ -82,32 +67,14 @@ class Graph():
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
 
-if __name__=='__main__':
+    def predict_cases(self, n_steps):
+        sum = 0
+        cumulative_cases = []
 
-    vertexes, edges, cities_df = readFiles()
+        for i in range(n_steps):
+            sum += self.getTotalCases()
+            cumulative_cases.append(sum)
+            
+            self.autoUpdateCases()
 
-    # casos ativos de coronavírus em cada vértice. Definir posteriormente...
-    initial_values = np.random.uniform(0, 100, size=len(vertexes))
-
-    graph = Graph(vertexes, edges, cities_df, initial_values)
-    
-    # pesos a serem definidos pelo algoritmo genético
-    weights = np.random.uniform(0, 0.2, size=graph.m)
-
-    graph.setWeights(weights)
-
-    prediction_time = 10
-
-    x = range(prediction_time)
-    y = []
-    sum = 0
-
-    for i in range(prediction_time):
-        sum += graph.getTotalCases()
-        y.append(sum)
-        print(y[i])
-        
-        graph.autoUpdateCases()
-    
-    plt.plot(x, y)
-    plt.show()
+        return cumulative_cases

@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Thu Nov 26 16:53:32 2020"
+Creator "igraph version 0.8.3 Fri Nov 27 00:24:35 2020"
 Version 1
 graph
 [
@@ -10,7 +10,7 @@ graph
     label "Conceição da Barra de Minas"
     lati -21,1316
     long -44,4729
-    value 91,6839148874543
+    value 42,9563978443179
   ]
   node
   [
@@ -19,7 +19,7 @@ graph
     label "Coronel Xavier Chaves"
     lati -21,0277
     long -44,2206
-    value 1,78783818791743
+    value 24,4013298794086
   ]
   node
   [
@@ -28,7 +28,7 @@ graph
     label "Dores de Campos"
     lati -21,1139
     long -44,0207
-    value 24,6722765464306
+    value 43,0087133287093
   ]
   node
   [
@@ -37,7 +37,7 @@ graph
     label "Lagoa Dourada"
     lati -20,9139
     long -44,0797
-    value 44,4533939532207
+    value 7,97379714246106
   ]
   node
   [
@@ -46,7 +46,7 @@ graph
     label "Madre de Deus de Minas"
     lati -12,7446
     long -38,6153
-    value 55,627222500469
+    value 55,6449367855104
   ]
   node
   [
@@ -55,7 +55,7 @@ graph
     label "Nazareno"
     lati -21,2168
     long -44,6138
-    value 43,9712119805874
+    value 81,565046002044
   ]
   node
   [
@@ -64,7 +64,7 @@ graph
     label "Piedade do Rio Grande"
     lati -21,469
     long -44,1938
-    value 7,65148644505364
+    value 48,5493386690723
   ]
   node
   [
@@ -73,7 +73,7 @@ graph
     label "Prados"
     lati -21,0597
     long -44,0778
-    value 54,8749928607182
+    value 70,448030685997
   ]
   node
   [
@@ -82,7 +82,7 @@ graph
     label "Resende Costa"
     lati -20,9171
     long -44,2407
-    value 47,3714175314683
+    value 5,34459036891248
   ]
   node
   [
@@ -91,7 +91,7 @@ graph
     label "Ritápolis"
     lati -21,0276
     long -44,3204
-    value 93,5555279947677
+    value 24,1249064237964
   ]
   node
   [
@@ -100,7 +100,7 @@ graph
     label "Santa Cruz de Minas"
     lati -21,1241
     long -44,2202
-    value 56,4809516738531
+    value 23,993061492774
   ]
   node
   [
@@ -109,7 +109,7 @@ graph
     label "Santana do Garambéu"
     lati -21,5983
     long -44,105
-    value 7,9385346407059
+    value 79,64068959263
   ]
   node
   [
@@ -118,7 +118,7 @@ graph
     label "São João del-Rei"
     lati -21,1311
     long -44,2526
-    value 10,7378325073338
+    value 13,7743560097737
   ]
   node
   [
@@ -127,7 +127,7 @@ graph
     label "São Tiago"
     lati -20,9075
     long -44,5098
-    value 83,152730743885
+    value 30,5871814599656
   ]
   node
   [
@@ -136,7 +136,7 @@ graph
     label "Tiradentes"
     lati -21,1102
     long -44,1744
-    value 65,7933762149442
+    value 14,1339108986247
   ]
   edge
   [
