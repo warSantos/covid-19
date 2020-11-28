@@ -35,7 +35,7 @@ def readFiles():
     # semana 26.
 
     # pegar os novos casos da semana 28-2 por cada cidade para
-    initial_values = df_region.query('epi_week > 25 and epi_week < 28')[['ibgeID','newCases']].groupby(['ibgeID']).sum().reset_index()
+    initial_values = df_region.query('epi_week > 25 and epi_week < 27')[['ibgeID','newCases']].groupby(['ibgeID']).sum().reset_index()
 
     df_real_curve = df_region.query('epi_week > 27')[['date','totalCases']].groupby(['date']).sum().reset_index()
     df_real_curve = df_real_curve.sort_values(by=['date'], ascending=True)
@@ -55,7 +55,7 @@ if __name__=='__main__':
 
 
     # Repartindo a curva real em teste e treino.
-    size_sample_train = week_days * 5
+    size_sample_train = 63
     print("Curva Real: ", real_curve)
     train = real_curve[:size_sample_train]
     test = real_curve[size_sample_train:]
@@ -65,7 +65,9 @@ if __name__=='__main__':
     ag = Ag(graph, train)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=35, nger=100, cp=0.9, mp=0.01, xmin=0.0, xmax=0.3)
+    c, weights = ag.run(npop=50, nger=150, cp=0.9, mp=0.01, xmin=0.0, xmax=0.3)
+
+    print(c, weights)
     
     # executa o projeção novamente com os pesos que ajustaram a curva melhor
     graph.setWeights(c, weights)
