@@ -33,7 +33,7 @@ class Graph():
             self.graph.vs[i]["name"] = df.iloc[i]['cod_ibge']
             self.graph.vs[i]["lati"] = df.iloc[i]['lati']
             self.graph.vs[i]["long"] = df.iloc[i]['long']
-            self.initial_values.append(initial_values[initial_values['ibgeID'] == df.iloc[i]['cod_ibge']].iloc[0]['newCases'])
+            self.initial_values.append(initial_values[initial_values['ibgeID'] == df.iloc[i]['cod_ibge']].iloc[0]['newCases']/7)
             self.graph.vs[i]["value"] = self.initial_values[i]
 
 
@@ -67,7 +67,7 @@ class Graph():
             for j in range(0, self.n):
                 sum += self.graph.vs[j]['value']*self.graph[j, i]
 
-            newVertexesValue[i] = self.graph.vs[i]['value']*(1 - self.c) + sum
+            newVertexesValue[i] = self.graph.vs[i]['value']*self.c + sum
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]

@@ -166,7 +166,7 @@ class Ag():
                 self.pop[i_worst_individual] = best.copy()
                 self.fit[i_worst_individual] = self.fitness_function(best)
 
-            print(np.argmin(self.fit))
+            print(np.min(self.fit))
 
         
 
