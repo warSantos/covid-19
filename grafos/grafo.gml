@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Fri Nov 27 00:24:35 2020"
+Creator "igraph version 0.8.3 Sat Nov 28 10:40:23 2020"
 Version 1
 graph
 [
@@ -8,135 +8,135 @@ graph
     id 0
     name 3115201
     label "Conceição da Barra de Minas"
-    lati -21,1316
-    long -44,4729
-    value 42,9563978443179
+    lati -21.1316
+    long -44.4729
+    value 2
   ]
   node
   [
     id 1
     name 3119708
     label "Coronel Xavier Chaves"
-    lati -21,0277
-    long -44,2206
-    value 24,4013298794086
+    lati -21.0277
+    long -44.2206
+    value 8
   ]
   node
   [
     id 2
     name 3123007
     label "Dores de Campos"
-    lati -21,1139
-    long -44,0207
-    value 43,0087133287093
+    lati -21.1139
+    long -44.0207
+    value 1
   ]
   node
   [
     id 3
     name 3137403
     label "Lagoa Dourada"
-    lati -20,9139
-    long -44,0797
-    value 7,97379714246106
+    lati -20.9139
+    long -44.0797
+    value 6
   ]
   node
   [
     id 4
     name 3139102
     label "Madre de Deus de Minas"
-    lati -12,7446
-    long -38,6153
-    value 55,6449367855104
+    lati -12.7446
+    long -38.6153
+    value 2
   ]
   node
   [
     id 5
     name 3144508
     label "Nazareno"
-    lati -21,2168
-    long -44,6138
-    value 81,565046002044
+    lati -21.2168
+    long -44.6138
+    value 4
   ]
   node
   [
     id 6
     name 3150307
     label "Piedade do Rio Grande"
-    lati -21,469
-    long -44,1938
-    value 48,5493386690723
+    lati -21.469
+    long -44.1938
+    value 2
   ]
   node
   [
     id 7
     name 3152709
     label "Prados"
-    lati -21,0597
-    long -44,0778
-    value 70,448030685997
+    lati -21.0597
+    long -44.0778
+    value 3
   ]
   node
   [
     id 8
     name 3154200
     label "Resende Costa"
-    lati -20,9171
-    long -44,2407
-    value 5,34459036891248
+    lati -20.9171
+    long -44.2407
+    value 5
   ]
   node
   [
     id 9
     name 3156106
     label "Ritápolis"
-    lati -21,0276
-    long -44,3204
-    value 24,1249064237964
+    lati -21.0276
+    long -44.3204
+    value 0
   ]
   node
   [
     id 10
     name 3157336
     label "Santa Cruz de Minas"
-    lati -21,1241
-    long -44,2202
-    value 23,993061492774
+    lati -21.1241
+    long -44.2202
+    value 16
   ]
   node
   [
     id 11
     name 3158706
     label "Santana do Garambéu"
-    lati -21,5983
-    long -44,105
-    value 79,64068959263
+    lati -21.5983
+    long -44.105
+    value 0
   ]
   node
   [
     id 12
     name 3162500
     label "São João del-Rei"
-    lati -21,1311
-    long -44,2526
-    value 13,7743560097737
+    lati -21.1311
+    long -44.2526
+    value 191
   ]
   node
   [
     id 13
     name 3165008
     label "São Tiago"
-    lati -20,9075
-    long -44,5098
-    value 30,5871814599656
+    lati -20.9075
+    long -44.5098
+    value 5
   ]
   node
   [
     id 14
     name 3168804
     label "Tiradentes"
-    lati -21,1102
-    long -44,1744
-    value 14,1339108986247
+    lati -21.1102
+    long -44.1744
+    value 3
   ]
   edge
   [
