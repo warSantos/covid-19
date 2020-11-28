@@ -59,9 +59,13 @@ class Dataset():
             cids[cid] = {}
             # Verificando quantos casos a cidade tem por mês.
             for row in temp.itertuples():
+                
                 tks = row.date.split('-')
                 tks.pop()
                 mes = '-'.join(tks)
+                
+                mes = row.epi_week
+                
                 # Se este mês não estiver contabilidade no cidade.
                 if mes not in cids[cid]:
                     cids[cid][mes] = 0
