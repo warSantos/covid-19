@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Sat Nov 28 10:40:23 2020"
+Creator "igraph version 0.8.3 Sat Nov 28 11:49:14 2020"
 Version 1
 graph
 [
@@ -19,7 +19,7 @@ graph
     label "Coronel Xavier Chaves"
     lati -21.0277
     long -44.2206
-    value 8
+    value 7
   ]
   node
   [
@@ -37,7 +37,7 @@ graph
     label "Lagoa Dourada"
     lati -20.9139
     long -44.0797
-    value 6
+    value 5
   ]
   node
   [
@@ -55,7 +55,7 @@ graph
     label "Nazareno"
     lati -21.2168
     long -44.6138
-    value 4
+    value 3
   ]
   node
   [
@@ -73,7 +73,7 @@ graph
     label "Prados"
     lati -21.0597
     long -44.0778
-    value 3
+    value 2
   ]
   node
   [
@@ -82,7 +82,7 @@ graph
     label "Resende Costa"
     lati -20.9171
     long -44.2407
-    value 5
+    value 4
   ]
   node
   [
@@ -118,7 +118,7 @@ graph
     label "São João del-Rei"
     lati -21.1311
     long -44.2526
-    value 191
+    value 176
   ]
   node
   [
@@ -127,7 +127,7 @@ graph
     label "São Tiago"
     lati -20.9075
     long -44.5098
-    value 5
+    value 3
   ]
   node
   [
@@ -136,7 +136,7 @@ graph
     label "Tiradentes"
     lati -21.1102
     long -44.1744
-    value 3
+    value 2
   ]
   edge
   [
