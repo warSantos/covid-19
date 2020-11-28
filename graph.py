@@ -7,11 +7,14 @@ import random
 
 class Graph():
 
-    def __init__(self, vertexes, edges, df, initial_values):
+    def __init__(self, vertexes, edges, df, initial_values, initial_sum):
 
         # Criando um grafo direcionado.
         self.graph = igraph.Graph(directed=True)
-        self.initial_values = initial_values
+
+        # casos ativos no início do treino (soma dos novos casos dos últimos 14 dias)
+        self.initial_values = []
+        self.initial_sum = initial_sum
 
         self.m = len(edges)
         self.n = len(vertexes)
@@ -30,7 +33,9 @@ class Graph():
             self.graph.vs[i]["name"] = df.iloc[i]['cod_ibge']
             self.graph.vs[i]["lati"] = df.iloc[i]['lati']
             self.graph.vs[i]["long"] = df.iloc[i]['long']
-            self.graph.vs[i]["value"] = initial_values[i]
+            self.initial_values.append(initial_values[initial_values['ibgeID'] == df.iloc[i]['cod_ibge']].iloc[0]['newCases'])
+            self.graph.vs[i]["value"] = self.initial_values[i]
+
 
         self.graph.save("grafos/grafo.gml", format="gml")
 
@@ -68,7 +73,8 @@ class Graph():
             self.graph.vs[i]["value"] = newVertexesValue[i]
 
     def predict_cases(self, n_steps):
-        sum = 0
+        # casos acumulados até o momento de início
+        sum = self.initial_sum - np.sum(self.initial_values)
         cumulative_cases = []
 
         for i in range(n_steps):

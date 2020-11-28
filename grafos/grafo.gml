@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Sat Nov 28 13:33:15 2020"
+Creator "igraph version 0.8.3 Sat Nov 28 15:32:11 2020"
 Version 1
 graph
 [
@@ -10,7 +10,7 @@ graph
     label "Conceição da Barra de Minas"
     lati -21.1316
     long -44.4729
-    value 2
+    value 3
   ]
   node
   [
@@ -19,7 +19,7 @@ graph
     label "Coronel Xavier Chaves"
     lati -21.0277
     long -44.2206
-    value 7
+    value 5
   ]
   node
   [
@@ -28,7 +28,7 @@ graph
     label "Dores de Campos"
     lati -21.1139
     long -44.0207
-    value 1
+    value 3
   ]
   node
   [
@@ -46,7 +46,7 @@ graph
     label "Madre de Deus de Minas"
     lati -12.7446
     long -38.6153
-    value 2
+    value 3
   ]
   node
   [
@@ -55,7 +55,7 @@ graph
     label "Nazareno"
     lati -21.2168
     long -44.6138
-    value 3
+    value 1
   ]
   node
   [
@@ -64,7 +64,7 @@ graph
     label "Piedade do Rio Grande"
     lati -21.469
     long -44.1938
-    value 2
+    value 1
   ]
   node
   [
@@ -82,7 +82,7 @@ graph
     label "Resende Costa"
     lati -20.9171
     long -44.2407
-    value 4
+    value 6
   ]
   node
   [
@@ -91,7 +91,7 @@ graph
     label "Ritápolis"
     lati -21.0276
     long -44.3204
-    value 0
+    value 4
   ]
   node
   [
@@ -100,7 +100,7 @@ graph
     label "Santa Cruz de Minas"
     lati -21.1241
     long -44.2202
-    value 16
+    value 3
   ]
   node
   [
@@ -118,7 +118,7 @@ graph
     label "São João del-Rei"
     lati -21.1311
     long -44.2526
-    value 176
+    value 92
   ]
   node
   [
@@ -136,7 +136,7 @@ graph
     label "Tiradentes"
     lati -21.1102
     long -44.1744
-    value 2
+    value 3
   ]
   edge
   [
