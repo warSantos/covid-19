@@ -94,9 +94,10 @@ if __name__=='__main__':
     initial_values = np.array(initial_values)
 
     # Repartindo a curva real em teste e treino.
-    size_sample_train = week * 10
+    size_sample_train = week * 5
     print("Qtde dias de treino: ",size_sample_train)
     print("Intervalo de treino: ", start, " - ", start+size_sample_train)
+    print("Curva Real: ", real_curve)
     train = real_curve[start:start+size_sample_train]
     test = real_curve[start+size_sample_train:]
 
@@ -119,11 +120,11 @@ if __name__=='__main__':
     plt.grid()
     plt.xlabel("Qtde. Dias")
     plt.ylabel("Qtde. Casos")
-    plt.xticks(list(range(0,len(real_curve),5)))
+    plt.xticks(list(range(0,len(real_curve),10)))
     y_min = real_curve[0]
-    y_max = max(real_curve[-1], prediction[-1])
+    y_max = max(real_curve[-1], prediction[0])
     plt.vlines(start, ymin=y_min, ymax=y_max, colors='black',  linestyles='dotted', label='Start Point')
     plt.vlines(start+size_sample_train-1, ymin=y_min, ymax=y_max, colors='red',  linestyles='dashed', label='train/test')
-    plt.xlim([0,160])
+    plt.ylim([0,real_curve[-1]])
     plt.legend()
-    plt.show()
+    plt.savefig('plots/aprox.pdf')
