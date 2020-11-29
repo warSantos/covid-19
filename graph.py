@@ -4,6 +4,7 @@ import igraph
 import pandas as pd
 import numpy as np
 import random
+from datetime import datetime
 
 class Graph():
 
@@ -65,22 +66,48 @@ class Graph():
         for i in range(self.n):
             sum = 0
             for j in range(0, self.n):
-                sum += self.graph.vs[j]['value']*self.graph[j, i]
+                sum += round(self.graph.vs[j]['value']*self.graph[j, i])
 
-            newVertexesValue[i] = self.graph.vs[i]['value']*self.c + sum
+            newVertexesValue[i] = round(self.graph.vs[i]['value']*self.c) + sum
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
 
-    def predict_cases(self, n_steps):
+    def predict_cases(self, n_steps, debug=False):
+        def concat(parameters, sep):
+            text = ''
+            for i in range(len(parameters)):
+                text += str(parameters[i])
+
+                if i != len(parameters) -1:
+                    text += sep
+                else:
+                    text +='\n'
+
+            return text
+        
+        def printVertexes(step, fileOut, vertexes):
+            for vertex in vertexes:
+                fileOut.write(concat([step, vertex['name'], vertex['label'], vertex['value']], ','))
+        
+
         # casos acumulados até o momento de início
         sum = self.initial_sum - np.sum(self.initial_values)
         cumulative_cases = []
 
+        if debug:
+            fileOut = open('logs/' + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + '.csv', 'w')
+            fileOut.write(concat(['step','ibge','name','newCases'], ','))
+
         for i in range(n_steps):
             sum += self.getTotalCases()
             cumulative_cases.append(sum)
+            if debug:
+                printVertexes(i, fileOut, self.graph.vs)
             
             self.autoUpdateCases()
+
+        if debug:
+            fileOut.close()
 
         return cumulative_cases
