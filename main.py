@@ -65,15 +65,14 @@ if __name__=='__main__':
     ag = Ag(graph, train)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=50, nger=150, cp=0.9, mp=0.01, xmin=0.0, xmax=0.3)
+    c, weights = ag.run(npop=50, nger=10, cp=0.9, mp=0.01, xmin=0.0, xmax=0.3)
 
     print(c, weights)
     
     # executa o projeção novamente com os pesos que ajustaram a curva melhor
     graph.setWeights(c, weights)
     graph.resetVertexValues()
-    prediction = graph.predict_cases(len(real_curve))
-    
+    prediction = graph.predict_cases(len(real_curve), debug=True)
     
     #train_and_pred = list(train)+list(prediction)
     #plt.plot(train_and_pred, label="Prediction")
