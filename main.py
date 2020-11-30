@@ -53,7 +53,7 @@ def readFiles():
     # Para cada cidade.
     for cityID in set(ndf['ibgeID']):
         temp = ndf.query("ibgeID == '%s'" % cityID).sort_values(by=['date'], ascending=True)['totalCases']
-        cities_curves[cityID] = np.array(temp)/7
+        cities_curves[cityID] = np.array(temp)
         
     return vertexes, edges, cities_df, real_curve, cities_curves, initial_values, initial_sum
 
@@ -73,7 +73,7 @@ if __name__=='__main__':
     ag = Ag(graph, train, cities_curves)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=50, nger=100, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=0.5)
+    c, weights = ag.run(npop=50, nger=100, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=0.4)
 
     print(c, weights)
     

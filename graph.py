@@ -66,7 +66,7 @@ class Graph():
             sum = 0
             for j in range(0, self.n):
                 if self.graph.vs[j]["value"] > 0 and self.graph[j, i] > random():
-                    sum += round(self.graph.vs[j]['value']*self.graph[j, i])
+                    sum += 1
 
             newVertexesValue[i] = round(self.graph.vs[i]['value']*self.c[i]) + sum
 
