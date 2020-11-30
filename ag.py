@@ -20,7 +20,7 @@ class Ag():
     def fitness_function(self, x):
         
         self.graph.resetVertexValues()
-        self.graph.setWeights(x[0], x[1:])
+        self.graph.setWeights(x[0:self.graph.n], x[self.graph.n:])
         
         prediction = self.graph.predict_cases(self.n_steps_prediction)
 
@@ -90,15 +90,19 @@ class Ag():
         children = np.zeros(shape=(2, len(x)))
 
         for i in range(len(x)):
+            xmax = self.xmax_edge
+            if i < self.graph.n:
+                xmax = self.xmaxc
+
             if x[i] <= y[i]:
                 d = y[i] - x[i]
-                children[0][i] = random.uniform(max(x[i] - alpha*d, self.xmin), min(y[i] + beta*d, self.xmax))
-                children[1][i] = random.uniform(max(x[i] - alpha*d, self.xmin), min(y[i] + beta*d, self.xmax))
+                children[0][i] = random.uniform(max(x[i] - alpha*d, self.xmin), min(y[i] + beta*d, xmax))
+                children[1][i] = random.uniform(max(x[i] - alpha*d, self.xmin), min(y[i] + beta*d, xmax))
 
             else:
                 d = x[i] - y[i]
-                children[0][i] = random.uniform(max(y[i] - beta*d, self.xmin), min(x[i] + alpha*d, self.xmax))
-                children[1][i] = random.uniform(max(y[i] - beta*d, self.xmin), min(x[i] + alpha*d, self.xmax))
+                children[0][i] = random.uniform(max(y[i] - beta*d, self.xmin), min(x[i] + alpha*d, xmax))
+                children[1][i] = random.uniform(max(y[i] - beta*d, self.xmin), min(x[i] + alpha*d, xmax))
             
         return children
 
@@ -126,18 +130,25 @@ class Ag():
             for j in range(len(self.itermediate_pop[i])):
                 r = random.random()
                 if(r <= self.mp):
-                    self.itermediate_pop[i][j] = random.uniform(self.xmin, self.xmax)
+                    xmax = self.xmax_edge
+                    if j < self.graph.n:
+                        xmax = self.xmaxc
+                    self.itermediate_pop[i][j] = random.uniform(self.xmin, xmax)
 
 
-    def run(self, npop, nger, cp, mp, xmin, xmax):
-        self.pop = np.random.uniform(xmin, xmax, size=(npop, self.graph.m + 1))
+    def run(self, npop, nger, cp, mp, xmaxc, xmax_edge):
+        pop_c = np.random.uniform(0, xmaxc, size=(npop, self.graph.n))
+        pop_edge = np.random.uniform(0, xmax_edge, size=(npop, self.graph.m))
+        
+        self.pop = np.concatenate((pop_c, pop_edge), axis=1)
         self.itermediate_pop = self.pop.copy()
 
         self.npop = npop  # número população
         self.cp = cp      # probabilidade de cruzamento
         self.mp = mp      # probabilidade de mutação
-        self.xmin = xmin
-        self.xmax = xmax
+        self.xmin = 0
+        self.xmaxc = xmaxc
+        self.xmax_edge = xmax_edge
 
         self.fit = np.zeros(npop)
         self.normalized_fit = np.zeros(npop)
@@ -173,4 +184,4 @@ class Ag():
         best = self.pop[np.argmin(self.fit)].copy()
 
         # retorna c e o peso das arestas
-        return best[0], best[1:]
+        return best[0:self.graph.n], best[self.graph.n:]

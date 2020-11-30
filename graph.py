@@ -19,10 +19,7 @@ class Graph():
 
         self.m = len(edges)
         self.n = len(vertexes)
-
-        # taxa de recuperação diária do coronavírus
-        self.c = random.random()
-       
+      
         self.graph.add_vertices(vertexes)
         self.graph.add_edges(edges)
         
@@ -68,7 +65,7 @@ class Graph():
             for j in range(0, self.n):
                 sum += round(self.graph.vs[j]['value']*self.graph[j, i])
 
-            newVertexesValue[i] = round(self.graph.vs[i]['value']*self.c) + sum
+            newVertexesValue[i] = round(self.graph.vs[i]['value']*self.c[i]) + sum
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
