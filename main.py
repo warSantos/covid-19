@@ -46,12 +46,20 @@ def readFiles():
     initial_sum = real_curve[0]
     
     real_curve = np.array(real_curve)
-    
-    return vertexes, edges, cities_df, real_curve, initial_values, initial_sum
+
+    # Gerando o array de pontos de cada cidade.
+    ndf = df_region.query('epi_week > 27')
+    cities_curves = {}
+    # Para cada cidade.
+    for cityID in set(ndf['ibgeID']):
+        temp = ndf.query("ibgeID == '%s'" % cityID).sort_values(by=['date'], ascending=True)['totalCases']
+        cities_curves[cityID] = np.array(temp)/7
+        
+    return vertexes, edges, cities_df, real_curve, cities_curves, initial_values, initial_sum
 
 if __name__=='__main__':
 
-    vertexes, edges, cities_df, real_curve, initial_values, initial_sum = readFiles()
+    vertexes, edges, cities_df, real_curve, cities_curves, initial_values, initial_sum = readFiles()
 
 
     # Repartindo a curva real em teste e treino.
@@ -62,17 +70,18 @@ if __name__=='__main__':
 
     # Treinando o algoritimo.
     graph = Graph(vertexes, edges, cities_df, initial_values, initial_sum)
-    ag = Ag(graph, train)
+    ag = Ag(graph, train, cities_curves)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=50, nger=100, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=0.3)
+    c, weights = ag.run(npop=50, nger=100, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=0.5)
 
     print(c, weights)
     
     # executa o projeção novamente com os pesos que ajustaram a curva melhor
     graph.setWeights(c, weights)
     graph.resetVertexValues()
-    prediction = graph.predict_cases(len(real_curve), debug=True)
+    # Ignorando o dicionário de predição para cada cidade.
+    prediction, _ = graph.predict_cases(len(real_curve), debug=True)
     
     #train_and_pred = list(train)+list(prediction)
     #plt.plot(train_and_pred, label="Prediction")

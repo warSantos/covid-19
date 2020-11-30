@@ -35,7 +35,6 @@ class Graph():
             self.initial_values.append(initial_values[initial_values['ibgeID'] == df.iloc[i]['cod_ibge']].iloc[0]['newCases']/7)
             self.graph.vs[i]["value"] = self.initial_values[i]
 
-
         self.graph.save("grafos/grafo.gml", format="gml")
 
     def setWeights(self, c, weights):
@@ -48,11 +47,13 @@ class Graph():
             i += 1
     
     def getTotalCases(self):
+        
         sum = 0
         for v in self.graph.vs:
             sum += v['value']
 
         return sum
+        
 
     def resetVertexValues(self):
         for i in range(self.n):
@@ -73,6 +74,7 @@ class Graph():
             self.graph.vs[i]["value"] = newVertexesValue[i]
 
     def predict_cases(self, n_steps, debug=False):
+        
         def concat(parameters, sep):
             text = ''
             for i in range(len(parameters)):
@@ -98,6 +100,11 @@ class Graph():
             fileOut = open('logs/' + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + '.csv', 'w')
             fileOut.write(concat(['step','ibge','name','newCases'], ','))
 
+        # dicionário com curva de cidades.
+        cities_pred = {}
+        for v in self.graph.vs:
+            cities_pred[v['name']] = np.zeros(n_steps)
+        
         for i in range(n_steps):
             sum += self.getTotalCases()
             cumulative_cases.append(sum)
@@ -106,7 +113,11 @@ class Graph():
             
             self.autoUpdateCases()
 
+            # Para cada cidade (vértice).
+            for v in self.graph.vs:
+                cities_pred[v['name']][i] = v['value']
+
         if debug:
             fileOut.close()
 
-        return cumulative_cases
+        return cumulative_cases, cities_pred

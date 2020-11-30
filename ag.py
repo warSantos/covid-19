@@ -5,10 +5,11 @@ from graph import Graph
 
 class Ag():
 
-    def __init__(self, graph, real_curve):
+    def __init__(self, graph, real_curve, cities_curves):
         self.graph = graph
         self.real_curve = real_curve
         self.n_steps_prediction = len(real_curve)
+        self.cities_curves = cities_curves
 
     def sum_residual_squares(self, vector1, vector2):
         sum = 0
@@ -21,10 +22,17 @@ class Ag():
         
         self.graph.resetVertexValues()
         self.graph.setWeights(x[0:self.graph.n], x[self.graph.n:])
-        
-        prediction = self.graph.predict_cases(self.n_steps_prediction)
 
-        return self.sum_residual_squares(prediction, self.real_curve)
+        prediction, cities_pred = self.graph.predict_cases(self.n_steps_prediction)
+        
+        #return self.sum_residual_squares(prediction, self.real_curve)
+
+        # Para cada cidade (Ajustando pela curva de cada cidade).
+        total = 0
+        for cityID in self.cities_curves:
+            total += self.sum_residual_squares(cities_pred[cityID], self.cities_curves[cityID])
+
+        return total
 
     def evaluate_pop(self):
         for i in range(self.npop):
