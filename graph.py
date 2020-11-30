@@ -9,7 +9,7 @@ from random import random
 
 class Graph():
 
-    def __init__(self, vertexes, edges, df, initial_values, initial_sum):
+    def __init__(self, vertexes, edges, df, initial_values, initial_sum, initial_sum_cities):
 
         # Criando um grafo direcionado.
         self.graph = igraph.Graph(directed=True)
@@ -17,6 +17,7 @@ class Graph():
         # casos ativos no início do treino (soma dos novos casos dos últimos 14 dias)
         self.initial_values = []
         self.initial_sum = initial_sum
+        self.initial_sum_cities = initial_sum_cities
 
         self.m = len(edges)
         self.n = len(vertexes)
@@ -92,23 +93,22 @@ class Graph():
         
 
         # casos acumulados até o momento de início
-        initial_state = np.copy(self.initial_values)
+        
         sum = self.initial_sum - np.sum(self.initial_values)
-        cumulative_cases = []
+        cumulative_cases_group = []
+
+        cumulative_cases_cities = {}
+        for v in self.graph.vs:
+            cumulative_cases_cities[v['name']] = np.zeros(n_steps)
 
         if debug:
             fileOut = open('logs/' + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + '.csv', 'w')
             fileOut.write(concat(['step','ibge','name','newCases'], ','))
-
-        # dicionário com curva de cidades.
-        cities_pred = {}
-        for v in self.graph.vs:
-            cities_pred[v['name']] = np.zeros(n_steps)
-        
+       
         for i in range(n_steps):
-            
+
             sum += self.getTotalCases()
-            cumulative_cases.append(sum)
+            cumulative_cases_group.append(sum)
 
             if debug:
                 printVertexes(i, fileOut, self.graph.vs)
@@ -116,13 +116,16 @@ class Graph():
             self.autoUpdateCases()
             
             # Para cada cidade (vértice).
-            j = 0
             for v in self.graph.vs:
-                initial_state[j] += v['value']
-                cities_pred[v['name']][i] = initial_state[j]
-                j += 1
+                sum_city = 0
+                if i == 0:
+                    sum_city = self.initial_sum_cities[v['name']] - v['value']
+                else:
+                    sum_city = cumulative_cases_cities[v['name']][i-1]
+                
+                cumulative_cases_cities[v['name']][i] = sum_city + v['value']
 
         if debug:
             fileOut.close()
 
-        return cumulative_cases, cities_pred
+        return cumulative_cases_group, cumulative_cases_cities
