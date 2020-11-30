@@ -19,20 +19,26 @@ class Ag():
         return sum
 
     def fitness_function(self, x):
-        
-        self.graph.resetVertexValues()
+        fits_x = []
+
         self.graph.setWeights(x[0:self.graph.n], x[self.graph.n:])
 
-        prediction, cities_pred = self.graph.predict_cases(self.n_steps_prediction)
-        
-        #return self.sum_residual_squares(prediction, self.real_curve)
+        for i in range(8):
 
-        # Para cada cidade (Ajustando pela curva de cada cidade).
-        total = 0
-        for cityID in self.cities_curves:
-            total += self.sum_residual_squares(cities_pred[cityID], self.cities_curves[cityID])
+            self.graph.resetVertexValues()
 
-        return total
+            prediction, cities_pred = self.graph.predict_cases(self.n_steps_prediction)
+            
+            #return self.sum_residual_squares(prediction, self.real_curve)
+
+            # Para cada cidade (Ajustando pela curva de cada cidade).
+            total = 0
+            for cityID in self.cities_curves:
+                total += self.sum_residual_squares(cities_pred[cityID], self.cities_curves[cityID])
+            
+            fits_x.append(math.sqrt(total))
+
+        return np.mean(fits_x)
 
     def evaluate_pop(self):
         for i in range(self.npop):
