@@ -68,8 +68,12 @@ if __name__=='__main__':
     train = real_curve[:size_sample_train]
     test = real_curve[size_sample_train:]
 
+    initial_sum_cities = {}
+    for city in cities_curves:
+        initial_sum_cities[city] = cities_curves[city][0]
+
     # Treinando o algoritimo.
-    graph = Graph(vertexes, edges, cities_df, initial_values, initial_sum)
+    graph = Graph(vertexes, edges, cities_df, initial_values, initial_sum, initial_sum_cities)
     ag = Ag(graph, train, cities_curves)
 
     # executa o algoritmo genético
