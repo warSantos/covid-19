@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import random
 from datetime import datetime
+from random import random
 
 class Graph():
 
@@ -63,7 +64,8 @@ class Graph():
         for i in range(self.n):
             sum = 0
             for j in range(0, self.n):
-                sum += round(self.graph.vs[j]['value']*self.graph[j, i])
+                if self.graph.vs[j]["value"] > 0 and self.graph[j, i] > random():
+                    sum += round(self.graph.vs[j]['value']*self.graph[j, i])
 
             newVertexesValue[i] = round(self.graph.vs[i]['value']*self.c[i]) + sum
 
