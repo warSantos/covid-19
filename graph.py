@@ -66,9 +66,8 @@ class Graph():
             sum = 0
             for j in range(0, self.n):
                 if self.graph.vs[j]["value"] > 0 and self.graph[j, i] > random():
-                    sum += round(self.graph.vs[j]['value']*self.graph[j, i])
-
-            newVertexesValue[i] = round(self.graph.vs[i]['value']*self.c[i]) + sum
+                    sum += 1#round(self.graph.vs[j]['value']*self.graph[j, i])
+            newVertexesValue[i] = round(self.graph.vs[i]['value'] * self.c[i]) + sum
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
@@ -93,6 +92,7 @@ class Graph():
         
 
         # casos acumulados até o momento de início
+        initial_state = np.copy(self.initial_values)
         sum = self.initial_sum - np.sum(self.initial_values)
         cumulative_cases = []
 
@@ -106,16 +106,21 @@ class Graph():
             cities_pred[v['name']] = np.zeros(n_steps)
         
         for i in range(n_steps):
+            
             sum += self.getTotalCases()
             cumulative_cases.append(sum)
+
             if debug:
                 printVertexes(i, fileOut, self.graph.vs)
-            
-            self.autoUpdateCases()
 
+            self.autoUpdateCases()
+            
             # Para cada cidade (vértice).
+            j = 0
             for v in self.graph.vs:
-                cities_pred[v['name']][i] = v['value']
+                initial_state[j] += v['value']
+                cities_pred[v['name']][i] = initial_state[j]
+                j += 1
 
         if debug:
             fileOut.close()

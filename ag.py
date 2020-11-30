@@ -1,4 +1,5 @@
 import math
+from os import error
 import numpy as np
 import random
 from graph import Graph
@@ -28,11 +29,10 @@ class Ag():
         #return self.sum_residual_squares(prediction, self.real_curve)
 
         # Para cada cidade (Ajustando pela curva de cada cidade).
-        total = 0
+        erro_total = 0
         for cityID in self.cities_curves:
-            total += self.sum_residual_squares(cities_pred[cityID], self.cities_curves[cityID])
-
-        return total
+            erro_total += self.sum_residual_squares(cities_pred[cityID], self.cities_curves[cityID])
+        return erro_total
 
     def evaluate_pop(self):
         for i in range(self.npop):
@@ -183,11 +183,10 @@ class Ag():
             if elitism:
                 i_worst_individual = np.argmax(self.fit)
                 self.pop[i_worst_individual] = best.copy()
-                self.fit[i_worst_individual] = self.fitness_function(best)
-
+                erro = self.fitness_function(best)
+                self.fit[i_worst_individual] = erro
+            
             print(np.min(self.fit))
-
-        
 
         best = self.pop[np.argmin(self.fit)].copy()
 
