@@ -65,7 +65,7 @@ if __name__=='__main__':
     ag = Ag(graph, train)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=50, nger=10, cp=0.9, mp=0.01, xmin=0.0, xmax=0.3)
+    c, weights = ag.run(npop=50, nger=100, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=0.3)
 
     print(c, weights)
     
