@@ -6,11 +6,11 @@ from graph import Graph
 
 class Ag():
 
-    def __init__(self, graph, real_curve, cities_curves):
+    def __init__(self, graph, real_curve, city_ibge):
         self.graph = graph
         self.real_curve = real_curve
         self.n_steps_prediction = len(real_curve)
-        self.cities_curves = cities_curves
+        self.city_ibge = city_ibge
 
     def sum_residual_squares(self, vector1, vector2):
         sum = 0
@@ -22,22 +22,15 @@ class Ag():
     def fitness_function(self, x):
         fits_x = []
 
-        self.graph.setWeights(x[0:self.graph.n], x[self.graph.n:])
+        self.graph.setWeights(self.city_ibge, x[0:1], x[1:])
 
-        for i in range(8):
+        for i in range(30):
 
             self.graph.resetVertexValues()
 
-            prediction, cities_pred = self.graph.predict_cases(self.n_steps_prediction)
+            prediction = self.graph.predict_cases(self.n_steps_prediction, self.city_ibge)
             
-            #return self.sum_residual_squares(prediction, self.real_curve)
-
-            # Para cada cidade (Ajustando pela curva de cada cidade).
-            total = 0
-            for cityID in self.cities_curves:
-                total += self.sum_residual_squares(cities_pred[cityID], self.cities_curves[cityID])
-            
-            fits_x.append(math.sqrt(total))
+            fits_x.append( self.sum_residual_squares(prediction, self.real_curve) )
 
         return np.mean(fits_x)
 
@@ -106,7 +99,7 @@ class Ag():
 
         for i in range(len(x)):
             xmax = self.xmax_edge
-            if i < self.graph.n:
+            if i < 1:
                 xmax = self.xmaxc
 
             if x[i] <= y[i]:
@@ -146,14 +139,17 @@ class Ag():
                 r = random.random()
                 if(r <= self.mp):
                     xmax = self.xmax_edge
-                    if j < self.graph.n:
+                    if j < 1:
                         xmax = self.xmaxc
                     self.itermediate_pop[i][j] = random.uniform(self.xmin, xmax)
 
 
     def run(self, npop, nger, cp, mp, xmaxc, xmax_edge):
-        pop_c = np.random.uniform(0, xmaxc, size=(npop, self.graph.n))
-        pop_edge = np.random.uniform(0, xmax_edge, size=(npop, self.graph.m))
+
+        index_city = self.graph.dict_ibge_index[self.city_ibge]
+        
+        pop_c = np.random.uniform(0, xmaxc, size=(npop, 1))
+        pop_edge = np.random.uniform(0, xmax_edge, size=(npop, self.graph.graph.degree(index_city, mode='IN')))
         
         self.pop = np.concatenate((pop_c, pop_edge), axis=1)
         self.itermediate_pop = self.pop.copy()
@@ -198,4 +194,4 @@ class Ag():
         best = self.pop[np.argmin(self.fit)].copy()
 
         # retorna c e o peso das arestas
-        return best[0:self.graph.n], best[self.graph.n:]
+        return best[0:1], best[1:]

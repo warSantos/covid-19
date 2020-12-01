@@ -9,15 +9,12 @@ from random import random
 
 class Graph():
 
-    def __init__(self, vertexes, edges, df, initial_values, initial_sum, initial_sum_cities):
+    def __init__(self, vertexes, edges, df, cities_new_cases):
 
         # Criando um grafo direcionado.
         self.graph = igraph.Graph(directed=True)
 
-        # casos ativos no início do treino (soma dos novos casos dos últimos 14 dias)
-        self.initial_values = []
-        self.initial_sum = initial_sum
-        self.initial_sum_cities = initial_sum_cities
+        self.cities_new_cases = cities_new_cases
 
         self.m = len(edges)
         self.n = len(vertexes)
@@ -26,54 +23,76 @@ class Graph():
         self.graph.add_edges(edges)
         
         #define que o grafo é ponderado
-        self.graph.es["weight"] = 1.0        
+        self.graph.es["weight"] = 1.0
+        
+        self.dict_ibge_index = {}        
 
         for i in range(0, len(vertexes)):
-            self.graph.vs[i]["label"] = df.iloc[i]['nome']
-            self.graph.vs[i]["name"] = df.iloc[i]['cod_ibge']
+            self.graph.vs[i]["name"] = df.iloc[i]['nome']
+            self.graph.vs[i]["id"] = df.iloc[i]['cod_ibge']
             self.graph.vs[i]["lati"] = df.iloc[i]['lati']
             self.graph.vs[i]["long"] = df.iloc[i]['long']
-            self.initial_values.append(initial_values[initial_values['ibgeID'] == df.iloc[i]['cod_ibge']].iloc[0]['newCases']/7)
-            self.graph.vs[i]["value"] = self.initial_values[i]
+            self.graph.vs[i]["value"] = cities_new_cases[df.iloc[i]['cod_ibge']][0]
+            self.dict_ibge_index[df.iloc[i]['cod_ibge']] = i
 
         self.graph.save("grafos/grafo.gml", format="gml")
 
-    def setWeights(self, c, weights):
-        self.c = c
+    def setWeights(self, ibge_id, c, weights):
+        # descobre o índice no grafo de uma determinada cidade        
+        index_current_vertex = self.dict_ibge_index[ibge_id]
 
+        self.c = c
+                
+        # altera apenas as arestas que incidem em um determinado vértice
         i = 0
         for edge in self.graph.get_edgelist():
+            if edge[1] == index_current_vertex:
+                self.graph[edge[0], edge[1]] = weights[i]
+                i += 1
 
-            self.graph[edge[0], edge[1]] = weights[i]
-            i += 1
+            if i == len(weights):
+                break
     
-    def getTotalCases(self):
-        
+    # soma todos os novos casos de todas as cidades no passo corrente
+    def getTotalNewCases(self):        
         sum = 0
         for v in self.graph.vs:
             sum += v['value']
 
         return sum
         
-
+    #reseta o valor dos vértices para o valor inicial passado em cities_new_cases
     def resetVertexValues(self):
         for i in range(self.n):
-            self.graph.vs[i]["value"] = self.initial_values[i]
+            self.graph.vs[i]["value"] = self.cities_new_cases[self.graph.vs[i]['id']][0]
 
-    def autoUpdateCases(self):
+    
+    # avança um passo na predição
+    def autoUpdateCases(self, step, ibge_id):
         newVertexesValue = np.zeros(shape=self.n)
+        index_current_vertex = self.dict_ibge_index[ibge_id]
+
+        # se o vértice for = ibge_id então realiza a previsão baseada nos vizinhos
+        # se não, apenas atualiza os valores com base nos dados já conhecidos
 
         for i in range(self.n):
-            sum = 0
-            for j in range(0, self.n):
-                if self.graph.vs[j]["value"] > 0 and self.graph[j, i] > random():
-                    sum += 1#round(self.graph.vs[j]['value']*self.graph[j, i])
-            newVertexesValue[i] = round(self.graph.vs[i]['value'] * self.c[i]) + sum
+            if i != index_current_vertex:
+                newVertexesValue[i] = self.cities_new_cases[ibge_id][step]
+            else:
+                sum = 0
+                for j in range(0, self.n):
+                    if self.graph[j, i] > 0:
+                        if random() < self.graph.vs[j]["value"]/self.graph[j, i]:
+                            sum += 1
+
+                newVertexesValue[i] = self.graph.vs[i]['value'] * self.c[i] + sum
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
 
-    def predict_cases(self, n_steps, debug=False):
+    
+    # atualiza os novos casos n passos para a cidade ibge_id e retorna a curva acumulada
+    def predict_cases(self, n_steps, ibge_id, debug=False):
         
         def concat(parameters, sep):
             text = ''
@@ -89,43 +108,27 @@ class Graph():
         
         def printVertexes(step, fileOut, vertexes):
             for vertex in vertexes:
-                fileOut.write(concat([step, vertex['name'], vertex['label'], vertex['value']], ','))
+                fileOut.write(concat([step, vertex['id'], vertex['name'], vertex['value']], ','))
         
-
-        # casos acumulados até o momento de início
-        
-        sum = self.initial_sum - np.sum(self.initial_values)
-        cumulative_cases_group = []
-
-        cumulative_cases_cities = {}
-        for v in self.graph.vs:
-            cumulative_cases_cities[v['name']] = np.zeros(n_steps)
-
         if debug:
             fileOut = open('logs/' + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + '.csv', 'w')
             fileOut.write(concat(['step','ibge','name','newCases'], ','))
-       
+
+        cumulative_cases_city = []
+        
+        sum = 0
         for i in range(n_steps):
 
-            sum += self.getTotalCases()
-            cumulative_cases_group.append(sum)
+            sum += self.graph.vs[self.dict_ibge_index[ibge_id]]['value']
+            cumulative_cases_city.append(sum)
 
             if debug:
                 printVertexes(i, fileOut, self.graph.vs)
 
-            self.autoUpdateCases()
+            self.autoUpdateCases(i+1, ibge_id)
             
-            # Para cada cidade (vértice).
-            for v in self.graph.vs:
-                sum_city = 0
-                if i == 0:
-                    sum_city = self.initial_sum_cities[v['name']] - v['value']
-                else:
-                    sum_city = cumulative_cases_cities[v['name']][i-1]
-                
-                cumulative_cases_cities[v['name']][i] = sum_city + v['value']
-
+            
         if debug:
             fileOut.close()
 
-        return cumulative_cases_group, cumulative_cases_cities
+        return cumulative_cases_city
