@@ -1,5 +1,6 @@
 import pandas as pd
 import igraph
+from pprint import pprint
 
 df = pd.read_csv('tiradentes.txt')
 
@@ -26,3 +27,14 @@ grafo.add_edges(arestas)
 layout = grafo.layout_davidson_harel()
 igraph.plot(grafo,"tiradentes.pdf", layout=layout, bbox = (800, 800))
 grafo.save("tiradentes.gml", format="gml")
+
+pt = open('grafo_tiradentes.txt','w')
+total = len(grafo.vs)
+for i in range(total):
+    pt.write(str(i)+',')
+    l = []
+    for j in range(total):
+        if grafo.get_eid(i, j, directed=True, error=False) > -1:
+            l.append(str(j))
+    pt.write(','.join(l)+'\n')
+pt.close()

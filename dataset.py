@@ -7,14 +7,14 @@ import numpy as np
 
 class Dataset():
 
-    def __init__(self, caminho_dataset=None):
+    def __init__(self, caminho_dataset=None, dst='dados/df_micro.csv', base='grafos/cidades.txt'):
 
-        if os.path.exists('dados/df_micro.csv'):
-            self.df_micro = pd.read_csv('dados/df_micro.csv')
+        if os.path.exists(dst):
+            self.df_micro = pd.read_csv(dst)
             return
 
         # Carregando o dataset de cidades.
-        df_cids = pd.read_csv('grafos/cidades.txt')
+        df_cids = pd.read_csv(base)
 
         # Carregando o dataset de covid.
         df_covid = pd.read_csv(caminho_dataset)
@@ -24,7 +24,7 @@ class Dataset():
         
         print("Lista de cidades: ")
         pprint(set(self.df_micro['city']))
-        self.df_micro.to_csv('dados/df_micro.csv')
+        self.df_micro.to_csv(dst)
 
     def distrib_regs(self, att, alvo, x_label, y_label, dst, figsize=None, pos=1):
 
@@ -76,7 +76,7 @@ class Dataset():
 if __name__=='__main__':
 
     caminho_dataset = 'dados/cases-brazil-cities-time.csv'
-    df = Dataset(caminho_dataset)
+    df = Dataset(caminho_dataset, argv[1], argv[2])
     # Dist. de registros por cidade.
     #df.distrib_regs('ibgeID','city', 'Qtde. Registros', 'Cidades', 'plots/dist_registros_cids.pdf')
     # Dist. de registros por data.
