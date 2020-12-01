@@ -1,477 +1,462 @@
-Creator "igraph version 0.8.3 Mon Nov 30 19:33:48 2020"
+Creator "igraph version 0.8.3 Tue Dec  1 00:56:13 2020"
 Version 1
 graph
 [
   directed 1
   node
   [
-    id 0
-    name 3115201
-    label "Conceição da Barra de Minas"
+    id 3115201
+    name "Conceição da Barra de Minas"
     lati -21,1316
     long -44,4729
-    value 0,142857142857143
+    value 0
   ]
   node
   [
-    id 1
-    name 3119708
-    label "Coronel Xavier Chaves"
+    id 3119708
+    name "Coronel Xavier Chaves"
     lati -21,0277
     long -44,2206
-    value 0,571428571428571
+    value 0
   ]
   node
   [
-    id 2
-    name 3123007
-    label "Dores de Campos"
+    id 3123007
+    name "Dores de Campos"
     lati -21,1139
     long -44,0207
     value 0
   ]
   node
   [
-    id 3
-    name 3137403
-    label "Lagoa Dourada"
+    id 3137403
+    name "Lagoa Dourada"
     lati -20,9139
     long -44,0797
-    value 0,428571428571429
+    value 0
   ]
   node
   [
-    id 4
-    name 3139102
-    label "Madre de Deus de Minas"
+    id 3139102
+    name "Madre de Deus de Minas"
     lati -12,7446
     long -38,6153
     value 0
   ]
   node
   [
-    id 5
-    name 3144508
-    label "Nazareno"
+    id 3144508
+    name "Nazareno"
     lati -21,2168
     long -44,6138
-    value 0,142857142857143
+    value 0
   ]
   node
   [
-    id 6
-    name 3150307
-    label "Piedade do Rio Grande"
+    id 3150307
+    name "Piedade do Rio Grande"
     lati -21,469
     long -44,1938
-    value 0,142857142857143
+    value 0
   ]
   node
   [
-    id 7
-    name 3152709
-    label "Prados"
+    id 3152709
+    name "Prados"
     lati -21,0597
     long -44,0778
-    value 0,142857142857143
+    value 1
   ]
   node
   [
-    id 8
-    name 3154200
-    label "Resende Costa"
+    id 3154200
+    name "Resende Costa"
     lati -20,9171
     long -44,2407
-    value 0,285714285714286
+    value 2
   ]
   node
   [
-    id 9
-    name 3156106
-    label "Ritápolis"
+    id 3156106
+    name "Ritápolis"
     lati -21,0276
     long -44,3204
     value 0
   ]
   node
   [
-    id 10
-    name 3157336
-    label "Santa Cruz de Minas"
+    id 3157336
+    name "Santa Cruz de Minas"
     lati -21,1241
     long -44,2202
-    value 0,428571428571429
+    value 0
   ]
   node
   [
-    id 11
-    name 3158706
-    label "Santana do Garambéu"
+    id 3158706
+    name "Santana do Garambéu"
     lati -21,5983
     long -44,105
     value 0
   ]
   node
   [
-    id 12
-    name 3162500
-    label "São João del-Rei"
+    id 3162500
+    name "São João del-Rei"
     lati -21,1311
     long -44,2526
-    value 5,85714285714286
+    value 4
   ]
   node
   [
-    id 13
-    name 3165008
-    label "São Tiago"
+    id 3165008
+    name "São Tiago"
     lati -20,9075
     long -44,5098
-    value 0,285714285714286
+    value 0
   ]
   node
   [
-    id 14
-    name 3168804
-    label "Tiradentes"
+    id 3168804
+    name "Tiradentes"
     lati -21,1102
     long -44,1744
-    value 0,285714285714286
+    value 0
   ]
   edge
   [
-    source 0
-    target 5
+    source 3115201
+    target 3144508
     weight 1
   ]
   edge
   [
-    source 0
-    target 9
+    source 3115201
+    target 3156106
     weight 1
   ]
   edge
   [
-    source 0
-    target 12
+    source 3115201
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 0
-    target 13
+    source 3115201
+    target 3165008
     weight 1
   ]
   edge
   [
-    source 1
-    target 3
+    source 3119708
+    target 3137403
     weight 1
   ]
   edge
   [
-    source 1
-    target 7
+    source 3119708
+    target 3152709
     weight 1
   ]
   edge
   [
-    source 1
-    target 8
+    source 3119708
+    target 3154200
     weight 1
   ]
   edge
   [
-    source 1
-    target 9
+    source 3119708
+    target 3156106
     weight 1
   ]
   edge
   [
-    source 1
-    target 12
+    source 3119708
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 1
-    target 14
+    source 3119708
+    target 3168804
     weight 1
   ]
   edge
   [
-    source 2
-    target 7
+    source 3123007
+    target 3152709
     weight 1
   ]
   edge
   [
-    source 3
-    target 1
+    source 3137403
+    target 3119708
     weight 1
   ]
   edge
   [
-    source 3
-    target 7
+    source 3137403
+    target 3152709
     weight 1
   ]
   edge
   [
-    source 3
-    target 8
+    source 3137403
+    target 3154200
     weight 1
   ]
   edge
   [
-    source 4
-    target 6
+    source 3139102
+    target 3150307
     weight 1
   ]
   edge
   [
-    source 4
-    target 12
+    source 3139102
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 5
-    target 0
+    source 3144508
+    target 3115201
     weight 1
   ]
   edge
   [
-    source 5
-    target 12
+    source 3144508
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 5
-    target 13
+    source 3144508
+    target 3165008
     weight 1
   ]
   edge
   [
-    source 6
-    target 4
+    source 3150307
+    target 3139102
     weight 1
   ]
   edge
   [
-    source 6
-    target 11
+    source 3150307
+    target 3158706
     weight 1
   ]
   edge
   [
-    source 6
-    target 12
+    source 3150307
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 7
-    target 1
+    source 3152709
+    target 3119708
     weight 1
   ]
   edge
   [
-    source 7
-    target 2
+    source 3152709
+    target 3123007
     weight 1
   ]
   edge
   [
-    source 7
-    target 3
+    source 3152709
+    target 3137403
     weight 1
   ]
   edge
   [
-    source 7
-    target 12
+    source 3152709
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 7
-    target 14
+    source 3152709
+    target 3168804
     weight 1
   ]
   edge
   [
-    source 8
-    target 1
+    source 3154200
+    target 3119708
     weight 1
   ]
   edge
   [
-    source 8
-    target 3
+    source 3154200
+    target 3137403
     weight 1
   ]
   edge
   [
-    source 8
-    target 9
+    source 3154200
+    target 3156106
     weight 1
   ]
   edge
   [
-    source 8
-    target 13
+    source 3154200
+    target 3165008
     weight 1
   ]
   edge
   [
-    source 9
-    target 0
+    source 3156106
+    target 3115201
     weight 1
   ]
   edge
   [
-    source 9
-    target 1
+    source 3156106
+    target 3119708
     weight 1
   ]
   edge
   [
-    source 9
-    target 8
+    source 3156106
+    target 3154200
     weight 1
   ]
   edge
   [
-    source 9
-    target 12
+    source 3156106
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 9
-    target 13
+    source 3156106
+    target 3165008
     weight 1
   ]
   edge
   [
-    source 10
-    target 12
+    source 3157336
+    target 3162500
     weight 1
   ]
   edge
   [
-    source 10
-    target 14
+    source 3157336
+    target 3168804
     weight 1
   ]
   edge
   [
-    source 11
-    target 6
+    source 3158706
+    target 3150307
     weight 1
   ]
   edge
   [
-    source 12
-    target 0
+    source 3162500
+    target 3115201
     weight 1
   ]
   edge
   [
-    source 12
-    target 1
+    source 3162500
+    target 3119708
     weight 1
   ]
   edge
   [
-    source 12
-    target 4
+    source 3162500
+    target 3139102
     weight 1
   ]
   edge
   [
-    source 12
-    target 5
+    source 3162500
+    target 3144508
     weight 1
   ]
   edge
   [
-    source 12
-    target 6
+    source 3162500
+    target 3150307
     weight 1
   ]
   edge
   [
-    source 12
-    target 7
+    source 3162500
+    target 3152709
     weight 1
   ]
   edge
   [
-    source 12
-    target 9
+    source 3162500
+    target 3156106
     weight 1
   ]
   edge
   [
-    source 12
-    target 10
+    source 3162500
+    target 3157336
     weight 1
   ]
   edge
   [
-    source 12
-    target 14
+    source 3162500
+    target 3168804
     weight 1
   ]
   edge
   [
-    source 13
-    target 0
+    source 3165008
+    target 3115201
     weight 1
   ]
   edge
   [
-    source 13
-    target 5
+    source 3165008
+    target 3144508
     weight 1
   ]
   edge
   [
-    source 13
-    target 8
+    source 3165008
+    target 3154200
     weight 1
   ]
   edge
   [
-    source 13
-    target 9
+    source 3165008
+    target 3156106
     weight 1
   ]
   edge
   [
-    source 14
-    target 1
+    source 3168804
+    target 3119708
     weight 1
   ]
   edge
   [
-    source 14
-    target 7
+    source 3168804
+    target 3152709
     weight 1
   ]
   edge
   [
-    source 14
-    target 10
+    source 3168804
+    target 3157336
     weight 1
   ]
   edge
   [
-    source 14
-    target 12
+    source 3168804
+    target 3162500
     weight 1
   ]
 ]
