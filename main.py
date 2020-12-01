@@ -9,13 +9,11 @@ from ag import Ag
 from graph import Graph
 from pprint import pprint
 
-week_days = 7
-
 def readFiles():
     
     vertexes = []
     edges = []
-    graph_file = 'grafos/grafo.txt'
+    graph_file = 'grafos/grafo_tiradentes.txt'
     with open(graph_file, 'r') as fd:
         # Para cada lista de edges de cada vértice.
         for l in fd:
@@ -26,9 +24,9 @@ def readFiles():
             for v in tokens:
                 edges.append([vertex, v])
 
-    cities_df = pd.read_csv('grafos/cidades.txt')
+    cities_df = pd.read_csv('grafos/tiradentes.txt')
 
-    df_region = pd.read_csv('dados/df_micro.csv').sort_values(by=['epi_week'])
+    df_region = pd.read_csv('dados/df_tiradentes.csv').sort_values(by=['epi_week'])
     # A primeira semana a ser contabilizada foi a 13 em SJ. A pandemia
     # só passou a ser contabilizada em todas as cidades a partir da
     # semana 26.

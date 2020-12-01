@@ -35,7 +35,7 @@ class Graph():
             self.graph.vs[i]["value"] = cities_new_cases[df.iloc[i]['cod_ibge']][0]
             self.dict_ibge_index[df.iloc[i]['cod_ibge']] = i
 
-        self.graph.save("grafos/grafo.gml", format="gml")
+        # self.graph.save("grafos/grafo.gml", format="gml")
 
     def setWeights(self, ibge_id, c, weights):
         # descobre o índice no grafo de uma determinada cidade        
@@ -86,7 +86,7 @@ class Graph():
                 newVertexesValue[i] = self.graph.vs[i]['value'] * self.c + sum
             
             else:
-                newVertexesValue[i] = self.cities_new_cases[self.graph.vs[i]["id"]][step]            
+                newVertexesValue[i] = self.cities_new_cases[self.graph.vs[i]["id"]][step]
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
