@@ -83,7 +83,7 @@ class Graph():
                         if random() < self.graph.vs[j]["value"]/self.graph[j, i]:
                             sum += 1
 
-                newVertexesValue[i] = self.graph.vs[i]['value'] * self.c[i] + sum
+                newVertexesValue[i] = self.graph.vs[i]['value'] * self.c + sum
             
             else:
                 newVertexesValue[i] = self.cities_new_cases[self.graph.vs[i]["id"]][step]            
