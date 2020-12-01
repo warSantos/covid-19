@@ -52,7 +52,7 @@ if __name__=='__main__':
     graph = Graph(vertexes, edges, cities_df, cities_new_cases)
     
     n_steps=80
-    city = 3115201  #Conceição da Barra de Minas
+    city = 3119708  #Coronel Xavier Chaves
     accumulated_curve = []
 
     for i in range(len(cities_new_cases[city])):
@@ -61,7 +61,7 @@ if __name__=='__main__':
         else:
             accumulated_curve.append( cities_new_cases[city][i] + accumulated_curve[i-1] )
     
-    ag = Ag(graph, accumulated_curve[0:n_steps], 3115201)
+    ag = Ag(graph, accumulated_curve[0:n_steps], city)
 
     # executa o algoritmo genético
     c, weights = ag.run(npop=30, nger=100, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=50)

@@ -11,6 +11,7 @@ class Ag():
         self.real_curve = real_curve
         self.n_steps_prediction = len(real_curve)
         self.city_ibge = city_ibge
+        self.i_best = -1
 
     def sum_residual_squares(self, vector1, vector2):
         sum = 0
@@ -36,7 +37,8 @@ class Ag():
 
     def evaluate_pop(self):
         for i in range(self.npop):
-            self.fit[i] = self.fitness_function(self.pop[i])
+            if i != self.i_best:
+                self.fit[i] = self.fitness_function(self.pop[i])
 
         # adequações para o problema de minimização pelo complemento
         sum = np.sum(self.fit)
@@ -179,15 +181,16 @@ class Ag():
             self.mutation()
 
             best = self.pop[np.argmin(self.fit)].copy()
+            fit_best = np.min(self.fit)
             self.pop = self.itermediate_pop.copy()
             
             self.evaluate_pop()
             
             if elitism:
                 i_worst_individual = np.argmax(self.fit)
-                self.pop[i_worst_individual] = best.copy()
-                erro = self.fitness_function(best)
-                self.fit[i_worst_individual] = erro
+                self.pop[i_worst_individual] = best.copy()                
+                self.fit[i_worst_individual] = fit_best
+                self.i_best = i_worst_individual
             
             print(np.min(self.fit))
 
