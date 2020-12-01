@@ -76,9 +76,7 @@ class Graph():
         # se não, apenas atualiza os valores com base nos dados já conhecidos
 
         for i in range(self.n):
-            if i != index_current_vertex:
-                newVertexesValue[i] = self.cities_new_cases[ibge_id][step]
-            else:
+            if i == index_current_vertex:
                 sum = 0
                 for j in range(0, self.n):
                     if self.graph[j, i] > 0:
@@ -86,6 +84,9 @@ class Graph():
                             sum += 1
 
                 newVertexesValue[i] = self.graph.vs[i]['value'] * self.c[i] + sum
+            
+            else:
+                newVertexesValue[i] = self.cities_new_cases[self.graph.vs[i]["id"]][step]            
 
         for i in range(self.n):
             self.graph.vs[i]["value"] = newVertexesValue[i]
