@@ -51,20 +51,20 @@ if __name__=='__main__':
     # Treinando o algoritimo.
     graph = Graph(vertexes, edges, cities_df, cities_new_cases)
     
-    n_steps=90
+    n_steps=80
     city = 3115201  #Conceição da Barra de Minas
     accumulated_curve = []
 
-    for i in range(n_steps):
+    for i in range(len(cities_new_cases[city])):
         if i == 0:
             accumulated_curve.append(cities_new_cases[city][0])
         else:
             accumulated_curve.append( cities_new_cases[city][i] + accumulated_curve[i-1] )
     
-    ag = Ag(graph, accumulated_curve, 3115201)
+    ag = Ag(graph, accumulated_curve[0:n_steps], 3115201)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=30, nger=60, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=50)
+    c, weights = ag.run(npop=30, nger=40, cp=0.9, mp=0.01, xmaxc=3.0, xmax_edge=50)
 
     print(c, weights)
     
@@ -72,7 +72,7 @@ if __name__=='__main__':
     graph.setWeights(city, c, weights)
     graph.resetVertexValues()
     # Ignorando o dicionário de predição para cada cidade.
-    prediction = graph.predict_cases(n_steps, city, debug=True)
+    prediction = graph.predict_cases(len(cities_new_cases[city])-1, city, debug=True)
 
     plt.plot(prediction, label="Prediction")
     plt.plot(accumulated_curve, label="Real Curve")
@@ -82,7 +82,7 @@ if __name__=='__main__':
     plt.xticks(list(range(0,len(accumulated_curve),10)))
     y_min = 0
     y_max = max(accumulated_curve[-1], prediction[0])
-    plt.vlines(n_steps-1, ymin=y_min, ymax=y_max, colors='red',  linestyles='dashed', label='train/test')
+    plt.vlines(len(cities_new_cases[city])-1, ymin=y_min, ymax=y_max, colors='red',  linestyles='dashed', label='train/test')
     plt.ylim([0,accumulated_curve[-1]])
     plt.legend()
     plt.savefig('plots/aprox.pdf')
