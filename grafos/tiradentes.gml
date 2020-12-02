@@ -1,4 +1,4 @@
-Creator "igraph version 0.8.3 Tue Dec  1 18:31:18 2020"
+Creator "igraph version 0.8.3 Wed Dec  2 14:20:49 2020"
 Version 1
 graph
 [
@@ -138,18 +138,8 @@ graph
   ]
   edge
   [
-    source 15
-    target 0
-  ]
-  edge
-  [
     source 1
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 1
   ]
   edge
   [
@@ -158,18 +148,8 @@ graph
   ]
   edge
   [
-    source 15
-    target 2
-  ]
-  edge
-  [
     source 3
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 3
   ]
   edge
   [
@@ -178,18 +158,8 @@ graph
   ]
   edge
   [
-    source 15
-    target 4
-  ]
-  edge
-  [
     source 5
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 5
   ]
   edge
   [
@@ -198,18 +168,8 @@ graph
   ]
   edge
   [
-    source 15
-    target 6
-  ]
-  edge
-  [
     source 7
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 7
   ]
   edge
   [
@@ -218,18 +178,8 @@ graph
   ]
   edge
   [
-    source 15
-    target 8
-  ]
-  edge
-  [
     source 9
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 9
   ]
   edge
   [
@@ -238,18 +188,8 @@ graph
   ]
   edge
   [
-    source 15
-    target 10
-  ]
-  edge
-  [
     source 11
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 11
   ]
   edge
   [
@@ -258,27 +198,12 @@ graph
   ]
   edge
   [
-    source 15
-    target 12
-  ]
-  edge
-  [
     source 13
     target 15
   ]
   edge
   [
-    source 15
-    target 13
-  ]
-  edge
-  [
     source 14
     target 15
-  ]
-  edge
-  [
-    source 15
-    target 14
   ]
 ]
