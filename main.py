@@ -85,9 +85,7 @@ if __name__ == '__main__':
                                      accumulated_curve[i - 1])
 
     processes = list()
-    max_p = 4
-    execs_count = 0
-
+    max_p = 40
     
     options_nger = {70, 100, 150}   # opções número de gerações
     options_npop = {20, 30, 50}     # opções tamanho população
@@ -115,7 +113,7 @@ if __name__ == '__main__':
                                 time.sleep(5)
 
                             p = multip.Process(
-                                name=str(execs_count),
+                                name=str(process_id),
                                 target=run,
                                 args=(  # Argumentos para o método.
                                     graph,
