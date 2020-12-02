@@ -55,13 +55,13 @@ def readFiles():
     return vertexes, edges, cities_df, cities_new_cases
 
 
-def run(self, graph, accumulated_curve, city, cities_new_cases):
+def run(graph, accumulated_curve, city, cities_new_cases, cont):
 
     ag = Ag(graph, accumulated_curve[0:n_steps], city)
 
     # executa o algoritmo genético
     c, weights = ag.run(npop=30,
-                        nger=100,
+                        nger=2,
                         cp=0.9,
                         mp=0.01,
                         xmaxc=2.0,
@@ -76,7 +76,7 @@ def run(self, graph, accumulated_curve, city, cities_new_cases):
         graph.resetVertexValues()
         predictions[i] = graph.predict_cases(len(cities_new_cases[city]) - 1,
                                              city,
-                                             debug=True)
+                                             debug=False)
 
     mean_prediction = predictions.mean(axis=0)
 
@@ -99,7 +99,7 @@ def run(self, graph, accumulated_curve, city, cities_new_cases):
                label='train/test')
     plt.ylim([0, y_max])
     plt.legend()
-    plt.savefig('plots/aprox.pdf')
+    plt.savefig('plots/aprox_'+str(cont)+'.pdf')
 
 
 if __name__ == '__main__':
@@ -121,13 +121,13 @@ if __name__ == '__main__':
                                      accumulated_curve[i - 1])
 
     processes = list()
-    max_p = 30
+    max_p = 4
     execs_count = 0
 
     ### Executando os processos em paralelo. ###
 
     # Enquanto o todos os testes não forem executados.
-    while execs_count < n_tests:
+    while execs_count < 14:
         # Identifique os processos que estão vivos.
         processes = list(filter(lambda x: x.is_alive(), processes))
         # Se a quantidade de processos vivos for igual a quantidade
@@ -137,14 +137,16 @@ if __name__ == '__main__':
             time.sleep(5)
         else:
             # Se não crie mais um processo.
-            p = mp.Process(name=str(execs_count),
-                           target=run,
-                           args=( # Argumentos para o método.
-                               graph,
-                               accumulated_curve,
-                               city,
-                               cities_new_cases,
-                           ))
+            p = mp.Process(
+                name=str(execs_count),
+                target=run,
+                args=(  # Argumentos para o método.
+                    graph,
+                    accumulated_curve,
+                    city,
+                    cities_new_cases,
+                    execs_count,
+                ))
             processes.append(p)
             p.start()
             execs_count += 1
