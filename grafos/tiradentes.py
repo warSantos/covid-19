@@ -20,12 +20,15 @@ arestas = []
 
 for i in range(len(df)-1):
     arestas.append([i,len(df)-1])
-    arestas.append([len(df)-1, i])
+    #arestas.append([len(df)-1, i])
 
 grafo.add_edges(arestas)
 
+visual_style = {}
+visual_style["margin"] = 105
 layout = grafo.layout_davidson_harel()
-igraph.plot(grafo,"tiradentes.pdf", layout=layout, bbox = (800, 800))
+#layout = grafo.layout_kamada_kawai()
+igraph.plot(grafo,"tiradentes.pdf", layout=layout, bbox = (550, 500), **visual_style)
 grafo.save("tiradentes.gml", format="gml")
 
 pt = open('grafo_tiradentes.txt','w')
