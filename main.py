@@ -39,6 +39,13 @@ def readFiles():
     for cityID in set(df_new_cases['ibgeID']):
         temp = df_new_cases.query("ibgeID == '%s'" % cityID).sort_values(by=['date'], ascending=True)['newCases']
         cities_new_cases[cityID] = np.array(temp)
+    """
+        x = list(range(len(cities_new_cases[cityID])))
+        plt.plot(x, cities_new_cases[cityID], label=cityID)
+    plt.legend()
+    plt.savefig("plots/curvesTR.pdf")
+    plt.clf()
+    """
         
     return vertexes, edges, cities_df, cities_new_cases
 
@@ -62,7 +69,7 @@ if __name__=='__main__':
     ag = Ag(graph, accumulated_curve[0:n_steps], city)
 
     # executa o algoritmo genético
-    c, weights = ag.run(npop=30, nger=100, cp=0.9, mp=0.01, xmaxc=2.0, xmax_edge=50)
+    c, weights = ag.run(npop=30, nger=100, cp=0.9, mp=0.01, xmaxc=2.0, xmax_edge=80)
 
     print(c, weights)
     
