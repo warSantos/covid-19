@@ -4,6 +4,18 @@ import numpy as np
 import random
 from graph import Graph
 
+def concat(parameters, sep):
+    text = ''
+    for i in range(len(parameters)):
+        text += str(parameters[i])
+
+        if i != len(parameters) - 1:
+            text += sep
+        else:
+            text += '\n'
+
+    return text
+
 class Ag():
 
     def __init__(self, graph, real_curve, city_ibge):
@@ -146,7 +158,10 @@ class Ag():
                     self.itermediate_pop[i][j] = random.uniform(self.xmin, xmax)
 
 
-    def run(self, npop, nger, cp, mp, xmaxc, xmax_edge):
+    def run(self, npop, nger, cp, mp, xmaxc, xmax_edge, fileOut=None, id_exec=None):
+
+        if fileOut != None:
+            fileOut.write(concat(['nger','npop','cp','mp','xmaxc','xmax_edge','exec','g','worstFit','fit_avg','bestFit','desvPad','c','weights'], ';'))
 
         index_city = self.graph.dict_ibge_index[self.city_ibge]
         
@@ -184,6 +199,9 @@ class Ag():
             fit_best = np.min(self.fit)
             self.pop = self.itermediate_pop.copy()
             
+            if fileOut != None:
+                fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0:1], best[1:]], ';'))
+
             self.evaluate_pop()
             
             if elitism:
@@ -192,9 +210,10 @@ class Ag():
                 self.fit[i_worst_individual] = fit_best
                 self.i_best = i_worst_individual
             
-            print(np.min(self.fit))
-
         best = self.pop[np.argmin(self.fit)].copy()
+
+        if fileOut != None:
+            fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0:1], best[1:]], ';'))
 
         # retorna c e o peso das arestas
         return best[0:1], best[1:]
