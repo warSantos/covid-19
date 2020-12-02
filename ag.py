@@ -161,7 +161,7 @@ class Ag():
     def run(self, npop, nger, cp, mp, xmaxc, xmax_edge, fileOut=None, id_exec=None):
 
         if fileOut != None:
-            fileOut.write(concat(['nger','npop','cp','mp','xmaxc','xmax_edge','exec','g','worstFit','fit_avg','bestFit','desvPad','c','weights'], ';'))
+            fileOut.write(concat(['nger','npop','cp','mp','xmaxc','xmax_edge','exec','g','worstFit','fit_avg','bestFit','desvPad','c','weights'], ','))
 
         index_city = self.graph.dict_ibge_index[self.city_ibge]
         
@@ -200,7 +200,7 @@ class Ag():
             self.pop = self.itermediate_pop.copy()
             
             if fileOut != None:
-                fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0:1], best[1:]], ';'))
+                fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0], str(best[1:]).replace('\n','')], ','))
 
             self.evaluate_pop()
             
@@ -213,7 +213,7 @@ class Ag():
         best = self.pop[np.argmin(self.fit)].copy()
 
         if fileOut != None:
-            fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0:1], best[1:]], ';'))
+            fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0], str(best[1:]).replace('\n','')], ','))
 
         # retorna c e o peso das arestas
         return best[0:1], best[1:]

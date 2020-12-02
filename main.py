@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 from ag import Ag
 from graph import Graph
 from pprint import pprint
-import multiprocessing as mp
+import multiprocessing as multip
 import time
 
 
@@ -50,7 +50,7 @@ def readFiles():
 
 def run(graph, accumulated_curve, city, cities_new_cases, nger, npop, cp, mp, xmax_edge, id_exec, process_id):
 
-    file = open('logs/'+str(process_id)+'.csv', 'w')
+    file = open('logs/logsProcess'+str(process_id)+'.csv', 'w')
     ag = Ag(graph, accumulated_curve[0:n_steps], city)
 
     # executa o algoritmo genético
@@ -114,7 +114,7 @@ if __name__ == '__main__':
                                 # Espere cinco segundos para verificar novamente.
                                 time.sleep(5)
 
-                            p = mp.Process(
+                            p = multip.Process(
                                 name=str(execs_count),
                                 target=run,
                                 args=(  # Argumentos para o método.
@@ -126,6 +126,7 @@ if __name__ == '__main__':
                                     npop,
                                     cp,
                                     mp,
+                                    max_edge,
                                     id_exec,
                                     process_id
                                 ))
@@ -133,6 +134,7 @@ if __name__ == '__main__':
                             p.start()
                             
                             process_id += 1
+                            print(str(process_id) + " processos despachados")
 
     for processo in processes:
         processo.join()
