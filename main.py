@@ -85,14 +85,15 @@ if __name__ == '__main__':
                                      accumulated_curve[i - 1])
 
     processes = list()
-    max_p = 40
+    max_p = 35
     
     options_nger = [70, 100, 150]   # opções número de gerações
     options_npop = [20, 30, 50]     # opções tamanho população
-    options_maxedge = [80, 100]     # opções peso máximo aresta
-    options_mp = [0.1, 0.05, 0.01]  # opções probabilidade de mutação
+    options_maxedge = [70, 90, 110] # opções peso máximo aresta
+    options_mp = [0.05, 0.01]       # opções probabilidade de mutação
     options_cp = [0.8, 1.0]         # opções probabilidade de cruzamento
-    
+
+   
     ### Executando um teste fatorial em paralelo. ###
     process_id = 0
     for nger in options_nger:
