@@ -3,18 +3,7 @@ from os import error
 import numpy as np
 import random
 from graph import Graph
-
-def concat(parameters, sep):
-    text = ''
-    for i in range(len(parameters)):
-        text += str(parameters[i])
-
-        if i != len(parameters) - 1:
-            text += sep
-        else:
-            text += '\n'
-
-    return text
+from utils import concat
 
 class Ag():
 
