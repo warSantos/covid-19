@@ -6,6 +6,7 @@ import numpy as np
 import random
 from datetime import datetime
 from random import random
+from utils import concat
 
 
 class Graph():
@@ -96,18 +97,6 @@ class Graph():
     # atualiza os novos casos n passos para a cidade ibge_id e retorna a curva acumulada
 
     def predict_cases(self, n_steps, ibge_id, debug=False):
-
-        def concat(parameters, sep):
-            text = ''
-            for i in range(len(parameters)):
-                text += str(parameters[i])
-
-                if i != len(parameters) - 1:
-                    text += sep
-                else:
-                    text += '\n'
-
-            return text
 
         def printVertexes(step, fileOut, vertexes):
             for vertex in vertexes:
