@@ -87,11 +87,11 @@ if __name__ == '__main__':
     processes = list()
     max_p = 40
     
-    options_nger = {70, 100, 150}   # opções número de gerações
-    options_npop = {20, 30, 50}     # opções tamanho população
-    options_maxedge = {80, 100}     # opções peso máximo aresta
-    options_mp = {0.1, 0.05, 0.01}  # opções probabilidade de mutação
-    options_cp = {0.8, 1.0}         # opções probabilidade de cruzamento
+    options_nger = [70, 100, 150]   # opções número de gerações
+    options_npop = [20, 30, 50]     # opções tamanho população
+    options_maxedge = [80, 100]     # opções peso máximo aresta
+    options_mp = [0.1, 0.05, 0.01]  # opções probabilidade de mutação
+    options_cp = [0.8, 1.0]         # opções probabilidade de cruzamento
     
     ### Executando um teste fatorial em paralelo. ###
     process_id = 0
@@ -111,6 +111,7 @@ if __name__ == '__main__':
                             while(len(processes) == max_p):
                                 # Espere cinco segundos para verificar novamente.
                                 time.sleep(5)
+                                processes = list(filter(lambda x: x.is_alive(), processes))
 
                             p = multip.Process(
                                 name=str(process_id),
