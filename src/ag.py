@@ -3,18 +3,7 @@ from os import error
 import numpy as np
 import random
 from graph import Graph
-
-def concat(parameters, sep):
-    text = ''
-    for i in range(len(parameters)):
-        text += str(parameters[i])
-
-        if i != len(parameters) - 1:
-            text += sep
-        else:
-            text += '\n'
-
-    return text
+from utils import concat
 
 class Ag():
 
@@ -23,7 +12,6 @@ class Ag():
         self.real_curve = real_curve
         self.n_steps_prediction = len(real_curve)
         self.city_ibge = city_ibge
-        self.i_best = -1
 
     def sum_residual_squares(self, vector1, vector2):
         sum = 0
@@ -49,8 +37,7 @@ class Ag():
 
     def evaluate_pop(self):
         for i in range(self.npop):
-            if i != self.i_best:
-                self.fit[i] = self.fitness_function(self.pop[i])
+            self.fit[i] = self.fitness_function(self.pop[i])
 
         # adequações para o problema de minimização pelo complemento
         sum = np.sum(self.fit)
@@ -190,30 +177,28 @@ class Ag():
 
         for g in range(1, nger):
 
-            self.parents_selection()
-            self.crossover(0.75, 0.25)
-
-            self.mutation()
-
             best = self.pop[np.argmin(self.fit)].copy()
-            fit_best = np.min(self.fit)
-            self.pop = self.itermediate_pop.copy()
+            fit_best = np.min(self.fit)            
             
             if fileOut != None:
-                fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0], str(best[1:]).replace('\n','')], ','))
+                fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g-1, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0], str(best[1:]).replace('\n','')], ','))
 
+            self.parents_selection()
+            self.crossover(0.75, 0.25)
+            self.mutation()
+            
+            self.pop = self.itermediate_pop.copy()
             self.evaluate_pop()
             
             if elitism:
                 i_worst_individual = np.argmax(self.fit)
                 self.pop[i_worst_individual] = best.copy()                
                 self.fit[i_worst_individual] = fit_best
-                self.i_best = i_worst_individual
             
         best = self.pop[np.argmin(self.fit)].copy()
 
         if fileOut != None:
-            fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,g, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0], str(best[1:]).replace('\n','')], ','))
+            fileOut.write(concat([nger,npop,cp,mp,xmaxc,xmax_edge,id_exec,nger-1, np.max(self.fit), np.mean(self.fit), np.min(self.fit), np.std(self.fit), best[0], str(best[1:]).replace('\n','')], ','))
 
         # retorna c e o peso das arestas
-        return best[0:1], best[1:]
+        return best[0], best[1:]
