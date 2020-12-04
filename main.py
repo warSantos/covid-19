@@ -14,7 +14,7 @@ from utils import readFiles
 
 if __name__=='__main__':
 
-    vertexes, edges, cities_df, cities_new_cases = readFiles() 
+    vertexes, edges, cities_df, cities_new_cases = readFiles()
     
     # Treinando o algoritimo.
     graph = Graph(vertexes, edges, cities_df, cities_new_cases)
