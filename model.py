@@ -28,11 +28,7 @@ if __name__=='__main__':
     # executa o projeção novamente com os pesos que ajustaram a curva melhor
     # para cada um dos set de parâmetros.
     max_pred = 0
-<<<<<<< HEAD
     df_sets = pd.read_csv('datasets/best_set.csv')
-=======
-    df_sets = pd.read_csv('dados/best_set.csv')
->>>>>>> 4596f97109bcfbda1ab587bd11a152c84fadc8ae
     #labels = ['First','Second','Third', 'Fourth', 'Fifth','Sixth','Seventh','Eighth','Ninth','Tenth']
     labels = ['Prediction']#,'Second','Third', 'Fourth', 'Fifth']
     label_count = 0
