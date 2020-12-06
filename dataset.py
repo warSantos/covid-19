@@ -75,7 +75,7 @@ class Dataset():
 
 if __name__=='__main__':
 
-    caminho_dataset = 'dados/cases-brazil-cities-time.csv'
+    caminho_dataset = 'datasets/cases-brazil-cities-time.csv'
     df = Dataset(caminho_dataset, argv[1], argv[2])
     # Dist. de registros por cidade.
     #df.distrib_regs('ibgeID','city', 'Qtde. Registros', 'Cidades', 'plots/dist_registros_cids.pdf')

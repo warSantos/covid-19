@@ -20,7 +20,7 @@ def readFiles():
 
     cities_df = pd.read_csv('grafos/tiradentes.txt')
 
-    df_region = pd.read_csv('dados/df_tiradentes.csv').sort_values(
+    df_region = pd.read_csv('datasets/df_tiradentes.csv').sort_values(
         by=['epi_week'])
     # A primeira semana a ser contabilizada foi a 13 em SJ. A pandemia
     # só passou a ser contabilizada em todas as cidades a partir da
